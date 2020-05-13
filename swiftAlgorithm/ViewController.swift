@@ -207,5 +207,30 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }
         return returnArr;
     }
+    
+    
+    // MARK: 滑动窗口最大值
+    /*
+     1. 暴力法
+     */
+    func maxSlidingWindow(_ nums: [Int], _ k: Int) -> [Int] {
+        
+        var returnArr:Array<Int> = []
+        for i in 0..<nums.count - k + 1 {
+            
+            var max = 0
+            for j in i..<k + i {
+                if j == i {
+                    max = nums[j]
+                } else {
+                    max = maxi(max, b: nums[j])
+                }
+            }
+            returnArr.append(max)
+            
+        }
+        return returnArr
+    }
+    
 }
 
