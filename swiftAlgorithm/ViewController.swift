@@ -21,12 +21,14 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
 //        var arr = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
 //        setZeroes(&arr)
 
-        let tableView = UITableView.init()
-        tableView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        tableView.delegate = self
-        tableView.dataSource = self
-        arr = ["设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈"]
-        self.view.addSubview(tableView)
+//        let tableView = UITableView.init()
+//        tableView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        arr = ["设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈"]
+//        self.view.addSubview(tableView)
+        maxProduct([2,3,-2,4])
+        
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -231,6 +233,39 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         }
         return returnArr
     }
+    
+    
+    /*
+     乘积最大的子数组
+     解法:动态规划
+     */
+    
+    func maxProduct(_ nums: [Int]) -> Int {
+        
+//        if nums.count <= 1 {
+//
+//        }
+        guard nums.count > 1 else {
+            return nums.first ?? 0
+        }
+        var result: Int = .min
+        var imax = 1
+        var imin = 1
+        
+        for i in nums {
+            if i < 0 {
+                (imax, imin) = (imin, imax)
+            }
+            
+            imax = max(imax * i, i)
+            imin = min(imin * i, i)
+            result = max(result, imax)
+            
+        }
+        
+        return max(result, imax)
+    }
+    
     
 }
 
