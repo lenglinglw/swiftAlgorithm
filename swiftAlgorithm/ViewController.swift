@@ -27,8 +27,8 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
 //        tableView.dataSource = self
 //        arr = ["设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈"]
 //        self.view.addSubview(tableView)
-        maxProduct([2,3,-2,4])
-        
+//        maxProduct([2,3,-2,4])
+        validPalindrome("abcda")
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -266,6 +266,54 @@ class ViewController: UIViewController,UITableViewDelegate, UITableViewDataSourc
         return max(result, imax)
     }
     
+    /*
+     给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+     */
+    func validPalindrome(_ s: String) -> Bool {
+        var low = 0
+        var high = s.count - 1
+        var arr: [Character] = []
+        
+        for char in s {
+            arr.append(char)
+        }
+        
+        while low < high {
+            
+            if arr[low] == arr[high] {
+                low += 1;
+                high -= 1;
+            } else {
+                var s1 = s
+                var s2 = s
+                var lowdex  = s1.index(s1.startIndex, offsetBy: low)
+                var highdex = s2.index(s2.startIndex, offsetBy: high)
+                s1.remove(at:lowdex)
+                s2.remove(at: highdex)
+                return isPalindrome(s1) || isPalindrome(s2)
+            }
+        }
+        return true
+    }
+    
+    func isPalindrome(_ s: String) -> Bool {
+        var low = 0
+        var high = s.count - 1
+        var arr: [Character] = []
+        
+        for char in s {
+            arr.append(char)
+        }
+        
+        while low < high {
+            if arr[low] != arr[high] {
+                return false
+            }
+            low += 1;
+            high -= 1;
+        }
+        return true
+    }
     
 }
 
